@@ -1,4 +1,7 @@
 /*!
+ * MIT License
+ * Copyright (c) 2025 Greg Henle
+ * 
  * Color Controls: CC module
  *
  * The objective of this module is to provide developers with the means to
