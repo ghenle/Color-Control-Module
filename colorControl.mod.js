@@ -33,9 +33,9 @@ const CC = {
    * Convert a RGB array with values between 0 to 255 to a HTML 6 char
    * color code
    *
-   * param: array, rgb = RGB color array
-   * praram: bool, p = add "#" prefix to HTML color code defaults to true
-   * returns: string, HTML color code
+   * @param: array, rgb = RGB color array
+   * @praram: bool, p = add "#" prefix to HTML color code defaults to true
+   * @return: string, HTML color code
    */
   rgb2hex: function ( rgb, p )
   {
@@ -50,8 +50,8 @@ const CC = {
    * Convert HTML 6 char color code to RGB array with values between
    * 0 to 255
    *
-   * param: string, hex = #000000 or 000000 color format
-   * returns: array, RGB color array
+   * @param: string, hex = #000000 or 000000 color format
+   * @return: array, RGB color array
    */
   hex2rgb: function( hex )
   {
@@ -89,11 +89,11 @@ const CC = {
    * Converts hue, saturation, lightness to HTML color code
    * @url: https://en.wikipedia.org/wiki/HSL_and_HSV#HSL_to_RGB_alternative
    *
-   * param: float, h = hue, range = 0 to 1
-   * param: float, s = saturation, range = 0 to 1
-   * param: float, l = lightness, range = 0 to 1
-   * praram: bool, p = add "#" prefix to HTML color code defaults to true
-   * returns: string, HTML color code
+   * @param: float, h = hue, range = 0 to 1
+   * @param: float, s = saturation, range = 0 to 1
+   * @param: float, l = lightness, range = 0 to 1
+   * @praram: bool, p = add "#" prefix to HTML color code defaults to true
+   * @return: string, HTML color code
    */
   hsl2hex: function (h, s, l, p)
   {
@@ -109,8 +109,8 @@ const CC = {
   /*
    * Caculate a color's luminance from it's RGB values
    *
-   * param: array, rgb = RGB color array
-   * returns: float, luminance, range 0 to 1
+   * @param: array, rgb = RGB color array
+   * @return: float, luminance, range 0 to 1
    */
   luminance: function ( rgb )
   {
@@ -127,8 +127,8 @@ const CC = {
   /*
    * Caculate a color's brightness from it's RGB values
    *
-   * param: array, rgb = RGB color array
-   * returns: int, brightness range 0 to 255
+   * @param: array, rgb = RGB color array
+   * @return: int, brightness range 0 to 255
    */
   brightness: function ( rgb )
   {
@@ -137,9 +137,9 @@ const CC = {
   /*
    * Caculate color difference between two colors
    *
-   * param: array, rgb1 = RGB color array
-   * param: array, rgb2 = RGB color array
-   * returns: int, difference
+   * @param: array, rgb1 = RGB color array
+   * @param: array, rgb2 = RGB color array
+   * @return: int, difference
    */
   difference: function ( rgb1, rgb2 )
   {
@@ -149,9 +149,9 @@ const CC = {
    * From a RGB array, caculate and return the highest contrasting color
    * between white or black
    *
-   * param: array, rgb = RGB color array
-   * praram: bool, p = add "#" prefix to HTML color code defaults to true
-   * returns: string, HTML color code
+   * @param: array, rgb = RGB color array
+   * @param: bool, p = add "#" prefix to HTML color code defaults to true
+   * @return: string, HTML color code
    */
   contrastHex: function ( rgb, p )
   {
@@ -176,9 +176,9 @@ const CC = {
    *
    * Setting the ws parameter to true will return web safe colors.
    *
-   * param: int, r = number of colors 
-   * praram: bool, ws = web safe colors.
-   * returns: array, HTML color codes
+   * @param: int, r = number of colors 
+   * @param: bool, ws = web safe colors.
+   * @return: array, HTML color codes
    */
   colorWheel: function(r, ws)
   {
