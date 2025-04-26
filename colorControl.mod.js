@@ -69,8 +69,8 @@ const CC = {
   /*
    * Utility function for hsl2hex
    *
-   * @param: float m1 = modified lightness caculation 1
-   * @param: float m2 = modified lightness caculation 2
+   * @param: float m1 = modified lightness calculation 1
+   * @param: float m2 = modified lightness calculation 2
    * @param: float, h = hue, range = 0 to 1
    * @return: float, the modified lightness value.
    */
