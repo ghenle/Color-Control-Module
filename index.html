@@ -50,9 +50,9 @@
     <label for="comp">Compare</label>
     <div id="comp">
       <label for="col1">Color 1</label>
-      <input id="col1" type="text" value="" placeholder="#FFFFFF" pattern="^#[0-9a-f]{6}$">
+      <input id="col1" type="text" value="" placeholder="#FFFFFF" pattern="^#[0-9a-f]{6}$" data-ready="false">
       <label for="col2">Color 2</label>
-      <input id="col2" type="text" value="" placeholder="#000000" pattern="^#[0-9a-f]{6}$">
+      <input id="col2" type="text" value="" placeholder="#000000" pattern="^#[0-9a-f]{6}$" data-ready="false">
       <button id="check">Calculate Contrast Ratio</button>
       <label for="ratio">Contrast Ratio</label>
       <input id="ratio" type="text" value="">
@@ -120,32 +120,37 @@
         const ratio = document.getElementById("ratio");
         const display = document.getElementById("display");
         const regex = /^#[0-9a-f]{6}$/i;
+
+        const doKeyUp = (event) => {
+          const input = event.target;
+
+          if (regex.test(input.value)) {
+            const bg = CC.hex2rgb(input.value);
   
-        color1.addEventListener("keyup", (event) => {
-          if (regex.test(color1.value)) {
-            const bg = CC.hex2rgb(color1.value);
-  
-            color1.style.color = CC.contrastHex(bg);
-            display.style.color = color1.style.backgroundColor = color1.value;
+            input.style.color = CC.contrastHex(bg);
+            display.style.color = input.style.backgroundColor = input.value;
+            input.setAttribute("data-ready", "true");
+          } else {
+            input.setAttribute("data-ready", "false");            
+          }          
+        }
+        const doCalc = (event) => {
+          if ( color1.getAttribute("data-ready") !== "true" || color2.getAttribute("data-ready") !== "true" ) {
+            return false;
           }
-        });
-  
-        color2.addEventListener("keyup", (event) => {
-          if (regex.test(color2.value)) {
-            const bg = CC.hex2rgb(color2.value);
-  
-            color2.style.color = CC.contrastHex(bg);
-            display.style.backgroundColor = color2.style.backgroundColor = color2.value;
-          }
-        });
-  
-        button.addEventListener("click", (event) => {
+
           const c1 = CC.hex2rgb(color1.value);
           const c2 = CC.hex2rgb(color2.value);
           const cr = CC.contrastRatio(c1, c2);
   
           ratio.value = cr.toFixed(1) + ":1";
-        });
+
+          return true;
+        }
+
+        color1.addEventListener("keyup", doKeyUp);
+        color2.addEventListener("keyup", doKeyUp);
+        button.addEventListener("click", doCalc);
       });
     </script>
   </body>
