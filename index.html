@@ -128,13 +128,15 @@
             const bg = CC.hex2rgb(input.value);
   
             input.style.color = CC.contrastHex(bg);
-            display.style.color = input.style.backgroundColor = input.value;
+            input.style.backgroundColor = input.value;
             input.setAttribute("data-ready", "true");
+
+            doCalc()
           } else {
             input.setAttribute("data-ready", "false");            
           }          
         }
-        const doCalc = (event) => {
+        const doCalc = () => {
           if ( color1.getAttribute("data-ready") !== "true" || color2.getAttribute("data-ready") !== "true" ) {
             return false;
           }
@@ -142,7 +144,9 @@
           const c1 = CC.hex2rgb(color1.value);
           const c2 = CC.hex2rgb(color2.value);
           const cr = CC.contrastRatio(c1, c2);
-  
+
+          display.style.color = color1.value
+          display.style.backgroundColor = color2.value
           ratio.value = cr.toFixed(1) + ":1";
 
           return true;
