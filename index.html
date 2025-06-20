@@ -111,40 +111,42 @@
     </div>
 
     <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", (event) => {
-      const button = document.getElementById("check");
-      const color1 = document.getElementById("col1");
-      const color2 = document.getElementById("col2");
-      const ratio = document.getElementById("ratio");
-      const display = document.getElementById("display");
-      const regex = /^#[0-9a-f]{6}$/i;
+      import {CC} from './colorControl.mod.js';
 
-      color1.addEventListener("keyup", (event) => {
-        if (regex.test(color1.value)) {
-          const bg = CC.hex2rgb(color1.value);
-
-          color1.style.color = CC.contrastHex(bg);
-          display.style.color = color1.style.backgroundColor = color1.value;
-        }
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const button = document.getElementById("check");
+        const color1 = document.getElementById("col1");
+        const color2 = document.getElementById("col2");
+        const ratio = document.getElementById("ratio");
+        const display = document.getElementById("display");
+        const regex = /^#[0-9a-f]{6}$/i;
+  
+        color1.addEventListener("keyup", (event) => {
+          if (regex.test(color1.value)) {
+            const bg = CC.hex2rgb(color1.value);
+  
+            color1.style.color = CC.contrastHex(bg);
+            display.style.color = color1.style.backgroundColor = color1.value;
+          }
+        });
+  
+        color2.addEventListener("keyup", (event) => {
+          if (regex.test(color2.value)) {
+            const bg = CC.hex2rgb(color2.value);
+  
+            color2.style.color = CC.contrastHex(bg);
+            display.style.backgroundColor = color2.style.backgroundColor = color2.value;
+          }
+        });
+  
+        button.addEventListener("click", (event) => {
+          const c1 = CC.hex2rgb(color1.value);
+          const c2 = CC.hex2rgb(color2.value);
+          const cr = CC.contrastRatio(c1, c2);
+  
+          ratio.value = cr.toFixed(1) + ":1";
+        });
       });
-
-      color2.addEventListener("keyup", (event) => {
-        if (regex.test(color2.value)) {
-          const bg = CC.hex2rgb(color2.value);
-
-          color2.style.color = CC.contrastHex(bg);
-          display.style.backgroundColor = color2.style.backgroundColor = color2.value;
-        }
-      });
-
-      button.addEventListener("click", (event) => {
-        const c1 = CC.hex2rgb(color1.value);
-        const c2 = CC.hex2rgb(color2.value);
-        const cr = CC.contrastRatio(c1, c2);
-
-        ratio.value = cr.toFixed(1) + ":1";
-      });
-    });
     </script>
   </body>
 </html>
