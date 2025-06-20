@@ -128,21 +128,32 @@
             input.style.backgroundColor = input.value;
             input.setAttribute("data-ready", "true");
 
-            doCalc()
+            let cr = doCalc();
+            doStyle( cr );
           } else {
             input.setAttribute("data-ready", "false");            
+            doStyle( false );
           }          
         }
         const doCalc = () => {
           if ( color1.getAttribute("data-ready") !== "true" || color2.getAttribute("data-ready") !== "true" ) {
-            level2A.style.borderColor = "gray";
-            level3A.style.borderColor = "gray";
             return false;
           }
 
           const c1 = CC.hex2rgb(color1.value);
           const c2 = CC.hex2rgb(color2.value);
           const cr = CC.contrastRatio(c1, c2);
+          return cr;
+        }
+        /**
+         * @param cr = contrastRatio
+         **/
+        const doStyle = ( cr ) => {
+          if ( cr === false ) {
+            level2A.style.borderColor = "gray";
+            level3A.style.borderColor = "gray";
+            return;
+          }
 
           display.style.color = color1.value
           display.style.backgroundColor = color2.value
@@ -164,8 +175,6 @@
             level2A.style.borderColor = "green"
             level3A.style.borderColor = "green"            
           }
- 
-          return true;
         }
 
         color1.addEventListener("keyup", doKeyUp);
