@@ -1,0 +1,150 @@
+<html>
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Calculate Contrast Ratio</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+
+
+    <style id="compiled-css" type="text/css">
+    * {
+      font-family: sans-serif;
+    }
+
+    #comp {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto(1fr);
+      gap: 0.5rem;
+    }
+
+    #display {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    #info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+
+    /* EOS */
+    </style>
+
+
+  </head>
+
+  <body>
+    <label for="comp">Compare</label>
+    <div id="comp">
+      <label for="col1">Color 1</label>
+      <input id="col1" type="text" value="" placeholder="#FFFFFF" pattern="^#[0-9a-f]{6}$" style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 0);">
+      <label for="col2">Color 2</label>
+      <input id="col2" type="text" value="" placeholder="#000000" pattern="^#[0-9a-f]{6}$" style="color: rgb(0, 0, 0); background-color: rgb(244, 117, 33);">
+      <button id="check">Calculate Contrast Ratio</button>
+      <label for="ratio">Contrast Ratio</label>
+      <input id="ratio" type="text" value="">
+      <label for="display">Display</label>
+      <input id="display" type="text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." readonly="" style="color: rgb(0, 0, 0); background-color: rgb(244, 117, 33);">
+    </div>
+    <div id="info">
+      <section class="guideline">
+        <div class="header-wrapper">
+          <h4>
+            <bdi>Success Criterion 1.4.3 </bdi>Contrast (Minimum)
+          </h4>
+        </div>
+        <div class="doclinks">
+          <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html">Understanding Contrast (Minimum)</a>
+          <span class="screenreader">|</span> <br><a href="https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum">How to Meet Contrast (Minimum)</a>
+        </div>
+        <p class="conformance-level">(Level AA)</p>
+        <p>
+          The visual presentation of text (sequence of characters that can be programmatically determined, where the sequence is expressing something in human language) 
+          and images of text (text that has been rendered in a non-text form (e.g., an image) in order to achieve a particular visual effect) has a  contrast ratio of at least 4.5:1, except for the following:
+        </p>
+        <dl>
+          <dt>Large Text</dt>
+          <dd>Large-scale (with at least 18 point or 14 point bold or font size that would yield equivalent size for Chinese, Japanese and Korean (CJK) fonts) text and images of large-scale text have a contrast ratio of at least  3:1;</dd>
+          <dt>Incidental</dt>
+          <dd>Text or images of text that are part of an inactive user interface component (a part of the content that is perceived by users as a single control for a distinct function), that are pure decoration (serving only an aesthetic purpose,
+            providing no information, and having no functionality), that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.</dd>
+          <dt>Logotypes</dt>
+          <dd>Text that is part of a logo or brand name has no contrast requirement.</dd>
+        </dl>
+      </section>
+      <sectionclass="guideline">
+        <div class="header-wrapper">
+          <h4>
+            <bdi>Success Criterion 1.4.6 </bdi>Contrast (Enhanced)
+          </h4>
+        </div>
+        <div class="doclinks">
+          <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-enhanced.html">Understanding Contrast (Enhanced)</a>
+          <span class="screenreader">|</span> <br><a href="https://www.w3.org/WAI/WCAG21/quickref/#contrast-enhanced">How to Meet Contrast (Enhanced)</a>
+        </div>
+        <p class="conformance-level">(Level AAA)</p>
+        <p>
+          The visual presentation of text and images of text that has been rendered in a non-text form (e.g., an image) in order to achieve a particular visual effect has a contrast ratio of at least 7:1, except for the following:
+        </p>
+        <dl>
+          <dt>Large Text</dt>
+          <dd>Large-scale (with at least 18 point or 14 point bold or font size that would yield equivalent size for Chinese, Japanese and Korean (CJK) fonts) text and images of large-scale text have a contrast ratio of at least 4.5:1;/dd>
+          <dt>Incidental</dt>
+          <dd>Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.</dd>
+          <dt>Logotypes</dt>
+          <dd>Text that is part of a logo or brand name has no contrast requirement.</dd>
+        </dl>
+      </section>
+    </div>
+
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const button = document.getElementById("check");
+      const color1 = document.getElementById("col1");
+      const color2 = document.getElementById("col2");
+      const ratio = document.getElementById("ratio");
+      const display = document.getElementById("display");
+      const regex = /^#[0-9a-f]{6}$/i;
+
+      color1.addEventListener("keyup", (event) => {
+        if (regex.test(color1.value)) {
+          const bg = CC.hex2rgb(color1.value);
+
+          color1.style.color = CC.contrastHex(bg);
+          display.style.color = color1.style.backgroundColor = color1.value;
+        }
+      });
+
+      color2.addEventListener("keyup", (event) => {
+        if (regex.test(color2.value)) {
+          const bg = CC.hex2rgb(color2.value);
+
+          color2.style.color = CC.contrastHex(bg);
+          display.style.backgroundColor = color2.style.backgroundColor = color2.value;
+        }
+      });
+
+      button.addEventListener("click", (event) => {
+        const c1 = CC.hex2rgb(color1.value);
+        const c2 = CC.hex2rgb(color2.value);
+        const cr = CC.contrastRatio(c1, c2);
+
+        ratio.value = cr.toFixed(1) + ":1";
+      });
+    });
+    </script>
+  </body>
+</html>
