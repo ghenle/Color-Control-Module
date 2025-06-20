@@ -36,6 +36,9 @@
       h1 {
         font-size: 1.5rem;
       }
+      .guideline {
+        border: 3px solid gray;
+      }
     </style>
   </head>
 
@@ -52,7 +55,7 @@
       <input id="display" type="text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." readonly>
     </div>
     <div id="info">
-      <section class="guideline">
+      <section id="level2A" class="guideline">
         <div class="header-wrapper">
           <h4>
             <bdi>Success Criterion 1.4.3 </bdi>Contrast (Minimum)
@@ -77,7 +80,7 @@
           <dd>Text that is part of a logo or brand name has no contrast requirement.</dd>
         </dl>
       </section>
-      <sectionclass="guideline">
+      <section id="level3A" class="guideline">
         <div class="header-wrapper">
           <h4>
             <bdi>Success Criterion 1.4.6 </bdi>Contrast (Enhanced)
@@ -110,6 +113,8 @@
         const color2 = document.getElementById("col2");
         const ratio = document.getElementById("ratio");
         const display = document.getElementById("display");
+        const level2A = document.getElementById("level2A");
+        const level3A = document.getElementById("level3A");
         const regex = /^#[0-9a-f]{6}$/i;
 
         const doKeyUp = (event) => {
@@ -129,6 +134,8 @@
         }
         const doCalc = () => {
           if ( color1.getAttribute("data-ready") !== "true" || color2.getAttribute("data-ready") !== "true" ) {
+            level2A.style.borderColor = "gray";
+            level3A.style.borderColor = "gray";
             return false;
           }
 
@@ -140,6 +147,23 @@
           display.style.backgroundColor = color2.value
           ratio.value = cr.toFixed(1) + ":1";
 
+          if ( cr < 3.1 ) {
+            level2A.style.borderColor = "red";
+            level3A.style.borderColor = "red";
+          }
+          if ( cr >= 3.1 && cr < 4.5 ) {
+            level2A.style.borderColor = "orange";
+            level3A.style.borderColor = "red";
+          }
+          if ( cr >= 4.5 $$ cd < 7.0 ) {
+            level2A.style.borderColor = "green"
+            level3A.style.borderColor = "orange";
+          }
+          if ( cr >= 7.0 ) {
+            level2A.style.borderColor = "green"
+            level3A.style.borderColor = "green"            
+          }
+ 
           return true;
         }
 
