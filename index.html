@@ -53,7 +53,6 @@
       <input id="col1" type="text" value="" placeholder="#FFFFFF" pattern="^#[0-9a-f]{6}$" data-ready="false">
       <label for="col2">Background Color</label>
       <input id="col2" type="text" value="" placeholder="#000000" pattern="^#[0-9a-f]{6}$" data-ready="false">
-      <button id="check">Calculate Contrast Ratio</button>
       <label for="ratio">Contrast Ratio</label>
       <input id="ratio" type="text" value="">
       <label for="display">Display</label>
@@ -114,7 +113,6 @@
       import {CC} from './colorControl.mod.js';
 
       document.addEventListener("DOMContentLoaded", (event) => {
-        const button = document.getElementById("check");
         const color1 = document.getElementById("col1");
         const color2 = document.getElementById("col2");
         const ratio = document.getElementById("ratio");
@@ -154,7 +152,6 @@
 
         color1.addEventListener("keyup", doKeyUp);
         color2.addEventListener("keyup", doKeyUp);
-        button.addEventListener("click", doCalc);
       });
     </script>
   </body>
