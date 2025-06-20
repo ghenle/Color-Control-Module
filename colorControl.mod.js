@@ -146,6 +146,22 @@ const CC = {
     return (Math.max(rgb1[0], rgb2[0]) - Math.min(rgb1[0], rgb2[0])) + (Math.max(rgb1[1], rgb2[1]) - Math.min(rgb1[1], rgb2[1])) + (Math.max(rgb1[2], rgb2[2]) - Math.min(rgb1[2], rgb2[2]));
   },
   /*
+   * From a RGB array, caculate and return the highest contrast ratio
+   *
+   * @param: array, rgb1 = RGB color array
+   * @param: array, rgb2 = RGB color array
+   * @return: float ratio X in X:1
+   */
+  contrastRatio: function ( rgb1, rgb2 )
+  {
+    var L1 = this.luminance( rgb1 );
+    var L2 = this.luminance( rgb2 );
+
+    return ( L2 < L1 )
+      ? (L1 + 0.05) / (L2 + 0.05)
+      : (L2 + 0.05) / (L1 + 0.05);
+  },
+  /*
    * From a RGB array, caculate and return the highest contrasting color
    * between white or black
    *
@@ -205,5 +221,6 @@ const CC = {
     return c;
   }
 }
+
 
 export { CC };
