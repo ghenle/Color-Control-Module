@@ -80,6 +80,7 @@ const CC = {
   hsl2hexUtil: function(m1, m2, h)
   {
     const h = (h < 0)? h+1:((h > 1)? h-1:h);
+
     if(h*6 < 1)
       return m1+(m2-m1)*h*6;
     if(h*2 < 1)
@@ -103,8 +104,8 @@ const CC = {
   {
     p = (typeof p == 'undefined')? true:p;
 
-    m2 = (l<=0.5)? l*(s+1):l+s-l*s;
-    m1 = l*2-m2;
+    const m2 = (l<=0.5)? l*(s+1):l+s-l*s;
+    const m1 = l*2-m2;
 
     return ((p)?'#':'') +
       Math.round(this.hsl2hexUtil(m1, m2, h+0.33333)*255).toUHex() +
