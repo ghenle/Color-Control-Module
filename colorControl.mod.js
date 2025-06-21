@@ -79,7 +79,7 @@ const CC = {
    */
   hsl2hexUtil: function(m1, m2, h)
   {
-    h = (h < 0)? h+1:((h > 1)? h-1:h);
+    var h = (h < 0)? h+1:((h > 1)? h-1:h);
 
     if(h*6 < 1)
       return m1+(m2-m1)*h*6;
