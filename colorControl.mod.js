@@ -1,7 +1,7 @@
 /*!
  * MIT License
  * Copyright (c) 2025 Greg Henle
- * 
+ *
  * Color Controls: CC module
  *
  * The objective of this module is to provide developers with the means to
@@ -20,10 +20,11 @@
  */
 if ( !Number.prototype.toUHex ) {
   Number.prototype.toUHex = function() {
-      var t = Math.abs(this);
-      var b = (t)? Math.ceil(Math.sqrt(t)/16):1;
-      var n = t.toString(16);
-      var zeroString = new Array( 1+Math.pow(2,b)-n.length ).join(0);
+      const t = Math.abs(this);
+      const b = (t)? Math.ceil(Math.sqrt(t)/16):1;
+      const n = t.toString(16);
+      const zeroString = new Array( 1+Math.pow(2,b)-n.length ).join(0);
+
       return zeroString+n;
   }
 }
@@ -39,11 +40,11 @@ const CC = {
    */
   rgb2hex: function ( rgb, p )
   {
-    var prefix = (typeof p == 'undefined' || p)? '#':'';
-    var RsHEX = rgb[0].toUHex();
-    var GsHEX = rgb[1].toUHex();
-    var BsHEX = rgb[2].toUHex();
-    
+    const prefix = (typeof p == 'undefined' || p)? '#':'';
+    const RsHEX = rgb[0].toUHex();
+    const GsHEX = rgb[1].toUHex();
+    const BsHEX = rgb[2].toUHex();
+
     return prefix+RsHEX+GsHEX+BsHEX;
   },
   /*
@@ -59,11 +60,13 @@ const CC = {
       return false;
     }
 
-    var rgb = hex.match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i), ret=[0,0,0];
+    const rgb = hex.match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i)
+    let ret=[0,0,0];
+
     ret[0] = parseInt('0x'+rgb[1]);
     ret[1] = parseInt('0x'+rgb[2]);
     ret[2] = parseInt('0x'+rgb[3]);
-    
+
     return ret;
   },
   /*
@@ -76,13 +79,14 @@ const CC = {
    */
   hsl2hexUtil: function(m1, m2, h)
   {
-    var h = (h < 0)? h+1:((h > 1)? h-1:h);
+    const h = (h < 0)? h+1:((h > 1)? h-1:h);
     if(h*6 < 1)
       return m1+(m2-m1)*h*6;
     if(h*2 < 1)
       return m2;
     if(h*3 < 2)
       return m1+(m2-m1)*(0.66666-h)*6;
+
     return m1;
   },
   /*
@@ -98,9 +102,10 @@ const CC = {
   hsl2hex: function (h, s, l, p)
   {
     p = (typeof p == 'undefined')? true:p;
-  
+
     m2 = (l<=0.5)? l*(s+1):l+s-l*s;
     m1 = l*2-m2;
+
     return ((p)?'#':'') +
       Math.round(this.hsl2hexUtil(m1, m2, h+0.33333)*255).toUHex() +
       Math.round(this.hsl2hexUtil(m1, m2, h)*255).toUHex() +
@@ -114,14 +119,14 @@ const CC = {
    */
   luminance: function ( rgb )
   {
-    var RsRGB = rgb[0]/255;
-    var GsRGB = rgb[1]/255;
-    var BsRGB = rgb[2]/255;
-    
-    var R = (RsRGB <= 0.03928)? RsRGB/12.92:Math.pow((RsRGB+0.055)/1.055, 2.4);
-    var G = (GsRGB <= 0.03928)? GsRGB/12.92:Math.pow((GsRGB+0.055)/1.055, 2.4);
-    var B = (BsRGB <= 0.03928)? BsRGB/12.92:Math.pow((BsRGB+0.055)/1.055, 2.4);
-    
+    const RsRGB = rgb[0]/255;
+    const GsRGB = rgb[1]/255;
+    const BsRGB = rgb[2]/255;
+
+    const R = (RsRGB <= 0.03928)? RsRGB/12.92:Math.pow((RsRGB+0.055)/1.055, 2.4);
+    const G = (GsRGB <= 0.03928)? GsRGB/12.92:Math.pow((GsRGB+0.055)/1.055, 2.4);
+    const B = (BsRGB <= 0.03928)? BsRGB/12.92:Math.pow((BsRGB+0.055)/1.055, 2.4);
+
     return 0.2126 * R + 0.7152 * G + 0.0722 * B;
   },
   /*
@@ -154,8 +159,8 @@ const CC = {
    */
   contrastRatio: function ( rgb1, rgb2 )
   {
-    var L1 = this.luminance( rgb1 );
-    var L2 = this.luminance( rgb2 );
+    const L1 = this.luminance( rgb1 );
+    const L2 = this.luminance( rgb2 );
 
     return ( L2 < L1 )
       ? (L1 + 0.05) / (L2 + 0.05)
@@ -171,18 +176,18 @@ const CC = {
    */
   contrastHex: function ( rgb, p )
   {
-    var prefix = (typeof p == 'undefined' || p)? '#':'';
-    var check = 0;
-    var L = this.luminance( rgb );
+    const prefix = (typeof p == 'undefined' || p)? '#':'';
+    let check = 0;
+    const L = this.luminance( rgb );
     check += ( L<0.5 )? 1:0;
-    
-    var B = this.brightness( rgb );
+
+    const B = this.brightness( rgb );
     check += ( B<128 )? 1:0;
-    
-    var DW = this.difference( rgb, [255, 255, 255] );
-    var DB = this.difference( rgb, [0, 0, 0] );
+
+    const DW = this.difference( rgb, [255, 255, 255] );
+    const DB = this.difference( rgb, [0, 0, 0] );
     check += ( DW > DB )? 1:0;
-    
+
     return ( check > 1 )? prefix+'ffffff':prefix+'000000';
   },
   /*
@@ -192,32 +197,33 @@ const CC = {
    *
    * Setting the ws parameter to true will return web safe colors.
    *
-   * @param: int, r = number of colors 
+   * @param: int, r = number of colors
    * @param: bool, ws = web safe colors.
    * @return: array, HTML color codes
    */
   colorWheel: function(r, ws)
   {
-    var x1 = 45/360, xm = 120/360, x2 = 195/360, bl = 0.5, h1 = 0, c = new Array();
+    const x1 = 45/360, xm = 120/360, x2 = 195/360, bl = 0.5, h1 = 0, c = new Array();
+
     if(typeof ws!='undefined' && ws){
-      var hi=(15/r)/30;
+      let hi=(15/r)/30;
       if(hi<1/30)
         hi=1/30;
     }else{
-      var hi=(180/r)/360;
+      let hi=(180/r)/360;
       if(hi<1/360)
         hi=1/360;
     }
-    
+
     do
     {
-      var h2 = h1+0.5;
+      const h2 = h1+0.5;
       c.push(this.hsl2hex(h1, 1, bl));
       c.push(this.hsl2hex(h2, 1, bl));
       h1+=hi;
     }
     while(h1 < 0.5)
-    
+
     return c;
   }
 }
