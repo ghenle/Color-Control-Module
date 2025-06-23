@@ -77,9 +77,9 @@
     <h1>Calculate Color Contrast Ratio</h1>
     <div id="comp">
       <label for="col1">Foreground Color</label>
-      <input id="col1" type="text" value="" placeholder="#FFFFFF" pattern="^#[0-9a-f]{6}$" data-ready="false">
+      <input id="col1" type="text" value="" placeholder="FFFFFF" pattern="^[0-9a-f]{6}$" data-ready="false">
       <label for="col2">Background Color</label>
-      <input id="col2" type="text" value="" placeholder="#000000" pattern="^#[0-9a-f]{6}$" data-ready="false">
+      <input id="col2" type="text" value="" placeholder="000000" pattern="^[0-9a-f]{6}$" data-ready="false">
       <label for="ratio">Contrast Ratio</label>
       <input id="ratio" type="text" value="">
       <label for="display1">Display</label>
@@ -144,7 +144,7 @@
         const display = document.querySelectorAll(".display");
         const level2A = document.getElementById("level2A");
         const level3A = document.getElementById("level3A");
-        const regex = /^#[0-9a-f]{6}$/i;
+        const regex = /^[0-9a-f]{6}$/i;
 
         const doKeyUp = (event) => {
           const input = event.target;
@@ -184,8 +184,8 @@
           }
 
           display.forEach( ( elm ) => {
-            elm.style.color = color1.value
-            elm.style.backgroundColor = color2.value            
+            elm.style.color = "#" + color1.value
+            elm.style.backgroundColor = "#" + color2.value            
           });
 
           ratio.value = cr.toFixed(1) + ":1";
