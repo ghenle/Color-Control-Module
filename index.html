@@ -22,9 +22,16 @@
         margin-bottom: 1.0rem;
       }
   
-      #display {
+      .display {
         padding: 1rem;
         text-align: center;
+      }
+      #display2 {
+        text-size: 1.1669rem;
+        font-weight: bold;
+      }
+      #display3 {
+        text-size: 1.5rem;
       }
   
       #info {
@@ -75,8 +82,12 @@
       <input id="col2" type="text" value="" placeholder="#000000" pattern="^#[0-9a-f]{6}$" data-ready="false">
       <label for="ratio">Contrast Ratio</label>
       <input id="ratio" type="text" value="">
-      <label for="display">Display</label>
-      <input id="display" type="text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." readonly>
+      <label for="display1">Display</label>
+      <input id="display1" class="display" type="text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." readonly>
+      <label for="display2">Display (14pt bold)</label>
+      <input id="display2" class="display" type="text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." readonly>
+      <label for="display3">Display (18pt)</label>
+      <input id="display3" class="display" type="text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." readonly>
     </div>
     <div id="info">
       <section id="level2A" class="guideline">
@@ -130,7 +141,7 @@
         const color1 = document.getElementById("col1");
         const color2 = document.getElementById("col2");
         const ratio = document.getElementById("ratio");
-        const display = document.getElementById("display");
+        const display = document.querySelectorAll(".display");
         const level2A = document.getElementById("level2A");
         const level3A = document.getElementById("level3A");
         const regex = /^#[0-9a-f]{6}$/i;
@@ -172,8 +183,11 @@
             return;
           }
 
-          display.style.color = color1.value
-          display.style.backgroundColor = color2.value
+          display.forEach( ( elm ) => {
+            elm.style.color = color1.value
+            elm.style.backgroundColor = color2.value            
+          });
+
           ratio.value = cr.toFixed(1) + ":1";
 
           if ( cr < 3.1 ) {
