@@ -145,6 +145,8 @@
         const level2A = document.getElementById("level2A");
         const level3A = document.getElementById("level3A");
         const regex = /^[0-9a-f]{6}$/i;
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContent("2D");
 
         const doKeyUp = (event) => {
           const input = event.target;
@@ -184,6 +186,11 @@
           }
 
           display.forEach( ( elm ) => {
+            const compStyle = window.getComputedStyle(elm);
+
+            console.log( compStyle.font )
+
+            //context.font = 
             elm.style.color = "#" + color1.value
             elm.style.backgroundColor = "#" + color2.value            
           });
