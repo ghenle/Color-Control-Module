@@ -22,6 +22,10 @@
         margin-bottom: 1.0rem;
       }
 
+      .color {
+        border: 3px solid red;
+      }
+
       .display {
         padding: 1rem;
         text-align: center;
@@ -77,9 +81,9 @@
     <h1>Calculate Color Contrast Ratio</h1>
     <div id="comp">
       <label for="col1">Foreground Color</label>
-      <input id="col1" type="text" value="" placeholder="FFFFFF" pattern="^[0-9a-f]{6}$" data-ready="false">
+      <input id="col1" class="color" type="text" value="" placeholder="FFFFFF" pattern="^[0-9a-f]{6}$" data-ready="false">
       <label for="col2">Background Color</label>
-      <input id="col2" type="text" value="" placeholder="000000" pattern="^[0-9a-f]{6}$" data-ready="false">
+      <input id="col2" class="color" type="text" value="" placeholder="000000" pattern="^[0-9a-f]{6}$" data-ready="false">
       <label for="ratio">Contrast Ratio</label>
       <input id="ratio" type="text" value="">
       <label for="display1">Display</label>
@@ -154,11 +158,15 @@
 
             input.style.color = CC.contrastHex(bg);
             input.style.backgroundColor = input.value;
+            input.style.borderColor = "green";
             input.setAttribute("data-ready", "true");
 
             let cr = doCalc();
             doStyle( cr );
           } else {
+            input.style.color = "black";
+            input.style.backgroundColor = "white";
+            input.style.borderColor = "red";
             input.setAttribute("data-ready", "false");            
             doStyle( false );
           }          
