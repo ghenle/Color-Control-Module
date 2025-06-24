@@ -208,13 +208,18 @@
             return;
           }
 
+          const myUrl = new URL(window.location.origin);
+          myUrl.pathname = window.location.pathname;
+          myUrl.searchParams.append("fc", color1.value);
+          myUrl.searchParams.append("bc", color2.value);
+
+          linkURL.value = myUrl.href;
+          ratio.value = cr.toFixed(1) + ":1";
+
           display.forEach( ( elm ) => {
             elm.style.color = "#" + color1.value
             elm.style.backgroundColor = "#" + color2.value            
           });
-
-          linkURL.value = window.location.href;
-          ratio.value = cr.toFixed(1) + ":1";
 
           if ( cr < 3.1 ) {
             level2A.style.borderColor = "red";
