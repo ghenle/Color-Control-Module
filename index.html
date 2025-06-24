@@ -215,8 +215,7 @@
 
           linkURL.value = myUrl.href;
           ratio.value = cr.toFixed(1) + ":1";
-
-          window.location.replace(myUrl.href);
+          window.history.pushState(window.location.search, NULL, myUrl.href);
 
           display.forEach( ( elm ) => {
             elm.style.color = "#" + color1.value
