@@ -214,7 +214,7 @@
           myUrl.searchParams.append("bc", color2.value);
 
           linkURL.value = myUrl.href;
-          ratio.value = cr.toFixed(1) + ":1";
+          ratio.value = cr.toFixed(2) + ":1";
           window.history.pushState(window.location.search, null, myUrl.href);
 
           display.forEach( ( elm ) => {
