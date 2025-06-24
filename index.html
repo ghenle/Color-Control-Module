@@ -144,19 +144,15 @@
       import {CC} from './colorControl.mod.js';
 
       document.addEventListener("DOMContentLoaded", (event) => {
-        const color1  = document.getElementById("col1");
-        const color2  = document.getElementById("col2");
-        const ratio   = document.getElementById("ratio");
-        const linkURL = document.getElementById("link");
-        const display = document.querySelectorAll(".display");
-        const level2A = document.getElementById("level2A");
-        const level3A = document.getElementById("level3A");
-        const regex   = /^[0-9a-f]{6}$/i;
-
+        const color1    = document.getElementById("col1");
+        const color2    = document.getElementById("col2");
+        const ratio     = document.getElementById("ratio");
+        const linkURL   = document.getElementById("link");
+        const display   = document.querySelectorAll(".display");
+        const level2A   = document.getElementById("level2A");
+        const level3A   = document.getElementById("level3A");
+        const regex     = /^[0-9a-f]{6}$/i;
         const urlParams = new URLSearchParams(window.location.search);
-
-        doParam(color1, "fc");
-        doParam(color2, "bc");
         
         const doParam = (input, param) => {
           if(urlParams.has(param)) {
@@ -240,6 +236,9 @@
 
         color1.addEventListener("keyup", doKeyUp);
         color2.addEventListener("keyup", doKeyUp);
+
+        doParam(color1, "fc");
+        doParam(color2, "bc");
       });
     </script>
   </body>
