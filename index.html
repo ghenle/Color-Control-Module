@@ -155,10 +155,10 @@
 
         const urlParams = new URLSearchParams(window.location.search);
 
-
-
+        doParam(color1, "fc");
+        doParam(color2, "bc");
         
-        const doParam = (param, input) => {
+        const doParam = (input, param) => {
           if(urlParams.has(param)) {
             const color = urlParams.get(param);
   
