@@ -16,7 +16,7 @@ https://www.w3.org/TR/WCAG20-TECHS/G17.html
 - [Understanding Contrast (Enhanced)](https://www.w3.org/WAI/WCAG21/Understanding/contrast-enhanced.html)
 - [How to Meet Contrast (Enhanced)](https://www.w3.org/WAI/WCAG21/quickref/#contrast-enhanced)
 
-
+# # Success Criterion Summary
 The visual presentation of text (sequence of characters that can be programmatically determined, where the sequence is expressing something in human language) and images of text (text that has been rendered in a non-text form (e.g., an image) in order to achieve a particular visual effect) has a contrast ratio of at least 4.5:1 for Level AA and at least 7:1 for Level AAA, except for the following:
 
 - Large Text
